@@ -2,12 +2,18 @@ import cv2 as cv
 import numpy as np
 
 import matplotlib.pyplot as plt
+import os
 
 
-siftAlg=cv.SIFT_create()
+file1 = os.path.join(os.path.dirname(__file__),'shuttle_01.jpg')
+file2 = os.path.join(os.path.dirname(__file__),'shuttle_03.jpg')
 
-shuttleImage1=cv.imread('spaceShuttle2.jpg')
-shuttleImage2=cv.imread('shuttle.jpg')
+siftAlg = cv.SIFT_create()
+
+shuttleImage1 = cv.imread(file1,-1)
+shuttleImage2 = cv.imread(file2,-1)
+
+
 
 keypoint1,descriptorVector1=siftAlg.detectAndCompute(shuttleImage1,None)
 keypoint2,descriptorVector2=siftAlg.detectAndCompute(shuttleImage2,None)
@@ -21,7 +27,7 @@ print(matches[0])
 
 
 for bestMatch, secondBestMatch in matches:
-    if bestMatch.distance < 0.7 * secondBestMatch.distance:
+    if bestMatch.distance < .7 * secondBestMatch.distance:
         validBestMatches.append([bestMatch])
 
 print(len(validBestMatches))
